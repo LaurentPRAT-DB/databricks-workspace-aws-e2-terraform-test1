@@ -31,5 +31,24 @@ resource "databricks_mws_credentials" "this" {
   account_id       = var.databricks_account_id
   role_arn         = aws_iam_role.cross_account_role.arn
   credentials_name = "${local.prefix}-creds"
-  depends_on       = [aws_iam_role_policy.this]
+  depends_on       = [ time_sleep.wait]
+  //depends_on       = [aws_iam_role_policy.this]
+}
+
+/* 
+
+Error: cannot create mws credentials: MALFORMED_REQUEST: Failed credential validation checks: please use a valid cross account IAM role with permissions setup correctly
+│ 
+│   with databricks_mws_credentials.this,
+│   on cross-account-role.tf line 29, in resource "databricks_mws_credentials" "this":
+│   29: resource "databricks_mws_credentials" "this" {
+
+fix: https://kb.databricks.com/en_US/terraform/failed-credential-validation-checks-error-with-terraform
+
+*/
+resource "time_sleep" "wait" {
+  depends_on = [
+    aws_iam_role.cross_account_role
+  ]
+  create_duration = "10s"
 }

@@ -1,0 +1,11 @@
+TODO
+>>> Error left:
+
+Databricks_token.pat: Creating...
+╷
+│ Error: cannot create token: default auth: cannot configure default credentials. Config: host=https://dbc-a075ab90-24af.cloud.databricks.com
+│ 
+│   with databricks_token.pat,
+│   on workspace.tf line 31, in resource "databricks_token" "pat":
+│   31: resource "databricks_token" "pat" {
+│ 

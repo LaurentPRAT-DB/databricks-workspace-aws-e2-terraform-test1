@@ -5,7 +5,8 @@ resource "databricks_mws_workspaces" "this" {
   account_id      = var.databricks_account_id
   aws_region      = var.region
   workspace_name  = local.prefix
-  deployment_name = local.prefix
+//  deployment_name = local.prefix
+// fix : https://discuss.hashicorp.com/t/databricks-aws-mws-workspaces/35473/2
 
   credentials_id           = databricks_mws_credentials.this.credentials_id
   storage_configuration_id = databricks_mws_storage_configurations.this.storage_configuration_id
